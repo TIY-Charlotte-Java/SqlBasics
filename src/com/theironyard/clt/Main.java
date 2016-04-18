@@ -5,21 +5,21 @@ import spark.Session;
 import spark.Spark;
 import spark.template.mustache.MustacheTemplateEngine;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.HashMap;
-import java.util.Scanner;
 
 public class Main {
     public static HashMap<String, User> users = new HashMap<>();
 
-
-
-
-
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
 	// write your code here
+        Connection conn = DriverManager.getConnection("jdbc:h2:./main");
+
+        Statement stmt = conn.createStatement();
+
 
         Spark.init();
 
@@ -138,7 +138,7 @@ public class Main {
 
                     response.redirect("/");
 
-                    
+
                     return "";
                 }
         );
