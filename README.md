@@ -1,7 +1,7 @@
 # SQL Basics
 
 ## Description
-Copy the TodoList project we made for the weekend homework. Modify it to use a database instead of a file for its storage.
+Copy the Microblog project we made for the weekend homework. Modify it to use a database instead of a file for its storage.
 
 ## Requirements
 
