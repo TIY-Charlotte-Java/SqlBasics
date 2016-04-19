@@ -13,6 +13,7 @@ import java.util.HashMap;
 
 public class Main {
 
+    public static HashMap<String, User> users = new HashMap<>();
 
     public static void main(String[] args) throws SQLException {
 	// write your code here
