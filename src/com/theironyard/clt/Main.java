@@ -12,14 +12,14 @@ import java.sql.Statement;
 import java.util.HashMap;
 
 public class Main {
-    public static HashMap<String, User> users = new HashMap<>();
+
 
     public static void main(String[] args) throws SQLException {
 	// write your code here
         Connection conn = DriverManager.getConnection("jdbc:h2:./main");
 
         Statement stmt = conn.createStatement();
-
+        stmt.execute("CREATE TABLE IF NOT EXIST messages(message IDENTIFY , username VARCHAR, text VARCHAR");
 
         Spark.init();
 
@@ -145,4 +145,5 @@ public class Main {
 
 
     }
+
 }
