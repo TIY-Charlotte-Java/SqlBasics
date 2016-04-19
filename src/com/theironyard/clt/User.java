@@ -23,10 +23,11 @@ public class User {
         Connection conn = DriverManager.getConnection("jdbc:h2:./main");
 
         Statement stmt = conn.createStatement();
+        stmt.execute("SELECT * FROM messages WHERE username = current");
         //make statement
         //execute statement
-//        ArrayList<String> messages = new ArrayList<>();
-//        messages.add(name);
+        ArrayList<String> messages = new ArrayList<>();
+        messages.add();
 
     }
 
@@ -46,7 +47,7 @@ public class User {
         Connection conn = DriverManager.getConnection("jdbc:h2:./main");
 
         Statement stmt = conn.createStatement();
-        stmt.execute("DELETE FROM message WHERE id=messageId");
+        stmt.execute("DELETE FROM messages WHERE id=messageId");
 
 
     }
@@ -56,7 +57,7 @@ public class User {
         Connection conn = DriverManager.getConnection("jdbc:h2:./main");
 
         Statement stmt = conn.createStatement();
-        stmt.execute("UPDATE messages SET message=text, WHERE id=messageId");
+        stmt.execute("UPDATE messages SET text=text, WHERE id=messageId");
         //make statement of edit
         //execute statement
     }
@@ -65,6 +66,6 @@ public class User {
         Connection conn = DriverManager.getConnection("jdbc:h2:./main");
 
         Statement stmt = conn.createStatement();
-        stmt.execute("CREATE TABLE IF NOT EXISTS messages(id IDENTITY , username VARCHAR, messages VARCHAR");
+        stmt.execute("CREATE TABLE IF NOT EXISTS messages(id IDENTITY , username VARCHAR, text VARCHAR");
     }
 }

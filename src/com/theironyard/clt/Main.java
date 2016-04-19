@@ -67,8 +67,7 @@ public class Main {
             int messageNumber = Integer.valueOf(request.queryParams("messageNumber"));
             User currentUser = users.get(session.attribute("userName"));
 
-            currentUser.messages.remove(messageNumber - 1);
-            currentUser.messages.add(messageNumber - 1, newMessage);
+            User.editMessage(newMessage, messageNumber);
 
             response.redirect("/");
 
