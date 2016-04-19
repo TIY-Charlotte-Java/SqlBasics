@@ -28,15 +28,11 @@ public class User {
             String text = results.getString("text");
             String username = results.getString("username");
             int id = results.getInt("id");
-            
+            Message message = new Message(id,username,text);
+            messages.add(message);
 
         }
-
-
-        //make statement
-        //execute statement
-
-
+        
         return messages;
     }
 
