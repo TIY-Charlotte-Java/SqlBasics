@@ -42,10 +42,10 @@ public class Main {
                 return "";
             }
 
-            int messageNumber = Integer.valueOf(request.queryParams("messageNumber"));
+            int messageNumber = Integer.valueOf(request.queryParams("choice"));
             User currentUser = users.get(session.attribute("userName"));
 
-            currentUser.messages.remove(messageNumber - 1);
+            User.deleteMessage(messageNumber);
 
             response.redirect("/");
 
@@ -134,7 +134,7 @@ public class Main {
                     // get message from query string
                     String message = request.queryParams("message");
 
-                    users.get(userName).messages.add(message);
+                    User.addMessage(message);
 
                     response.redirect("/");
 

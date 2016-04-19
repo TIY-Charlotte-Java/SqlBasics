@@ -20,7 +20,9 @@ public class User {
     }
     public ArrayList<Message> getMessages() throws SQLException{
         ensureMessagesExists();
-        
+        Connection conn = DriverManager.getConnection("jdbc:h2:./main");
+
+        Statement stmt = conn.createStatement();
         //make statement
         //execute statement
 //        ArrayList<String> messages = new ArrayList<>();
@@ -28,9 +30,12 @@ public class User {
 
     }
 
-    public void addMessage(String text) throws SQLException{
+    public static void addMessage(String text) throws SQLException{
         ensureMessagesExists();
+        Connection conn = DriverManager.getConnection("jdbc:h2:./main");
 
+        Statement stmt = conn.createStatement();
+        stmt.execute("INSERT INTO messages VALUES(', currentUser, text");
         //make a statement of add
         //execute statement
 
@@ -38,15 +43,20 @@ public class User {
 
     public static void deleteMessage(int messageId) throws SQLException{
         ensureMessagesExists();
+        Connection conn = DriverManager.getConnection("jdbc:h2:./main");
 
-        //make statement of delete
-        //execute statement
+        Statement stmt = conn.createStatement();
+        stmt.execute("DELETE FROM message WHERE id=messageId");
+
 
     }
 
     public static void editMessage(String text, int messageId) throws SQLException{
         ensureMessagesExists();
+        Connection conn = DriverManager.getConnection("jdbc:h2:./main");
 
+        Statement stmt = conn.createStatement();
+        stmt.execute("UPDATE messages SET message=text, WHERE id=messageId");
         //make statement of edit
         //execute statement
     }
