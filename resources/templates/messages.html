@@ -1,24 +1,41 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
 <body>
-<form action="/message" method="post">
-    <input type="text" placeholder="Enter a message" name="message"/>
-    <input type="submit">Post</input>
+
+<form action="/create-message" method="post">
+    <input type="text" name="message" />
+    <input type="submit" value="Post" />
 </form>
-<form>
-    <input type="text" placeholder="message to delete" name="choice"/>
-    <button type="submit">Delete</button>
+
+<form action="/destroy-user" method="post">
+    <input type="submit" value="Log out"/>
 </form>
-<form>
-    <input type="text" placeholder="number" name="editNumber"/>
-    <input type="text" placeholder="new message" name="edits"/>
-    <button type="submit">Edit</button>
+
+<form action="/edit-message" method="post">
+    Message Text:
+    <input type="text" name="newMessage" />
+    Message Number:
+    <input type="number" value="Message #" name="messageNumber" />
+    <input type="submit" value="Edit Message" />
 </form>
-Messages from {{user.name}}:
-<ol>
-    {{#user.posts}}
+
+<form action="/delete-message" method="post">
+    Message Number:
+    <input type="number" value="Message #" name="messageNumber" />
+    <input type="submit" value="Delete Message" />
+</form>
+
+<h3>Here are your message:
+</h3>
+<ul>
+    {{#messages}}
     <li>{{.}}</li>
-    {{/user.posts}}
-</ol>
+    {{/messages}}
+</ul>
+
 </body>
 </html>
