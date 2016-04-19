@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 
 public class User {
-    public String name;
+    public static String name;
     public String password = "42";
 
 
@@ -32,7 +32,7 @@ public class User {
             messages.add(message);
 
         }
-        
+
         return messages;
     }
 
@@ -40,8 +40,11 @@ public class User {
         ensureMessagesExists();
         Connection conn = DriverManager.getConnection("jdbc:h2:./main");
 
-        Statement stmt = conn.createStatement();
-        stmt.execute("INSERT INTO messages VALUES(', currentUser, text");
+        PreparedStatement stmt = conn.prepareStatement("INSERT INTO messages VALUES(', ?, ?");
+        stmt.setString(1, name);
+        stmt.setString(2, text);
+        stmt.executeQuery();
+
         //make a statement of add
         //execute statement
 
@@ -51,8 +54,8 @@ public class User {
         ensureMessagesExists();
         Connection conn = DriverManager.getConnection("jdbc:h2:./main");
 
-        Statement stmt = conn.createStatement();
-        stmt.execute("DELETE FROM messages WHERE id=messageId");
+        PreparedStatement stmt = conn.prepareStatement("DELETE FROM messages WHERE id=?");
+        stmt.setInt(1, messageId);
 
 
     }
@@ -61,8 +64,9 @@ public class User {
         ensureMessagesExists();
         Connection conn = DriverManager.getConnection("jdbc:h2:./main");
 
-        Statement stmt = conn.createStatement();
-        stmt.execute("UPDATE messages SET text=text, WHERE id=messageId");
+        PreparedStatement stmt = conn.prepareStatement("UPDATE messages SET text=?, WHERE id=?");
+        stmt.setString(1, text);
+        stmt.setInt(2, messageId);
         //make statement of edit
         //execute statement
     }
