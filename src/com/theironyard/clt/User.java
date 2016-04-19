@@ -14,8 +14,9 @@ public class User {
         this.name = name;
 
     }
-    public getMessages() {
+    public void getMessages() {
         ArrayList<String> messages = new ArrayList<>();
-        
+        messages.add(name);
+
     }
 }

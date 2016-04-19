@@ -21,127 +21,127 @@ public class Main {
         Statement stmt = conn.createStatement();
         stmt.execute("CREATE TABLE IF NOT EXIST messages(message IDENTIFY , username VARCHAR, text VARCHAR");
 
-        Spark.init();
-
-
-
-        Spark.post("/destroy-user", (request, response) -> {
-            Session session = request.session();
-
-            session.invalidate();
-
-            response.redirect("/");
-            return "";
-        });
-
-        Spark.post("/delete-message", (request, response) -> {
-            Session session = request.session();
-
-            if (session.attribute("userName") == null) {
-                response.redirect("/");
-                return "";
-            }
-
-            int messageNumber = Integer.valueOf(request.queryParams("messageNumber"));
-            User currentUser = users.get(session.attribute("userName"));
-
-            currentUser.messages.remove(messageNumber - 1);
-
-            response.redirect("/");
-
-
-
-            return "";
-        });
-
-
-        Spark.post("/edit-message", (request, response) -> {
-            Session session = request.session();
-
-            if (session.attribute("userName") == null) {
-                response.redirect("/");
-                return "";
-            }
-
-            String newMessage = request.queryParams("newMessage");
-            int messageNumber = Integer.valueOf(request.queryParams("messageNumber"));
-            User currentUser = users.get(session.attribute("userName"));
-
-            currentUser.messages.remove(messageNumber - 1);
-            currentUser.messages.add(messageNumber - 1, newMessage);
-
-            response.redirect("/");
-
-
-            return "";
-        });
-
-        Spark.get(
-                "/",
-                (request, response) -> {
-                    Session context = request.session();
-
-                    // if we can't get a user from session, show login
-                    if (context.attribute("userName") == null) {
-                        return new ModelAndView(users, "login.html");
-                    } else {
-                        User current = users.get(context.attribute("userName"));
-
-                        HashMap<String, User> model = new HashMap<>();
-
-                        model.put("user", current);
-
-                        return new ModelAndView(model, "messages.html");
-                    }
-                },
-                new MustacheTemplateEngine()
-        );
-
-        Spark.post("/create-user",
-                (request, response) -> {
-                    Session session = request.session();
-
-                    // get name from query string
-                    String name = request.queryParams("loginName");
-                    String password = request.queryParams("loginPassword");
-
-                    // if user exists at username
-                    User tempUser = new User(name);
-
-                    if (password.equals(tempUser.password)) {
-                        // save name to session
-                        session.attribute("userName", name);
-
-                        // make sure that the users hashmap has an entry with that name
-                        users.putIfAbsent(name, tempUser);
-                    }
-
-                    response.redirect("/");
-                    return "";
-                }
-        );
-
-        Spark.post("/create-message",
-                (request, response) -> {
-                    Session session = request.session();
-                    String userName = session.attribute("userName");
-
-                    if (userName == null) {
-                        response.redirect("/");
-                        return "";
-                    }
-
-                    // get message from query string
-                    String message = request.queryParams("message");
-
-                    users.get(userName).messages.add(message);
-
-                    response.redirect("/");
-
-
-                    return "";
-                }
-        );
+//        Spark.init();
+//
+//
+//
+//        Spark.post("/destroy-user", (request, response) -> {
+//            Session session = request.session();
+//
+//            session.invalidate();
+//
+//            response.redirect("/");
+//            return "";
+//        });
+//
+//        Spark.post("/delete-message", (request, response) -> {
+//            Session session = request.session();
+//
+//            if (session.attribute("userName") == null) {
+//                response.redirect("/");
+//                return "";
+//            }
+//
+//            int messageNumber = Integer.valueOf(request.queryParams("messageNumber"));
+//            User currentUser = users.get(session.attribute("userName"));
+//
+//            currentUser.messages.remove(messageNumber - 1);
+//
+//            response.redirect("/");
+//
+//
+//
+//            return "";
+//        });
+//
+//
+//        Spark.post("/edit-message", (request, response) -> {
+//            Session session = request.session();
+//
+//            if (session.attribute("userName") == null) {
+//                response.redirect("/");
+//                return "";
+//            }
+//
+//            String newMessage = request.queryParams("newMessage");
+//            int messageNumber = Integer.valueOf(request.queryParams("messageNumber"));
+//            User currentUser = users.get(session.attribute("userName"));
+//
+//            currentUser.messages.remove(messageNumber - 1);
+//            currentUser.messages.add(messageNumber - 1, newMessage);
+//
+//            response.redirect("/");
+//
+//
+//            return "";
+//        });
+//
+//        Spark.get(
+//                "/",
+//                (request, response) -> {
+//                    Session context = request.session();
+//
+//                    // if we can't get a user from session, show login
+//                    if (context.attribute("userName") == null) {
+//                        return new ModelAndView(users, "login.html");
+//                    } else {
+//                        User current = users.get(context.attribute("userName"));
+//
+//                        HashMap<String, User> model = new HashMap<>();
+//
+//                        model.put("user", current);
+//
+//                        return new ModelAndView(model, "messages.html");
+//                    }
+//                },
+//                new MustacheTemplateEngine()
+//        );
+//
+//        Spark.post("/create-user",
+//                (request, response) -> {
+//                    Session session = request.session();
+//
+//                    // get name from query string
+//                    String name = request.queryParams("loginName");
+//                    String password = request.queryParams("loginPassword");
+//
+//                    // if user exists at username
+//                    User tempUser = new User(name);
+//
+//                    if (password.equals(tempUser.password)) {
+//                        // save name to session
+//                        session.attribute("userName", name);
+//
+//                        // make sure that the users hashmap has an entry with that name
+//                        users.putIfAbsent(name, tempUser);
+//                    }
+//
+//                    response.redirect("/");
+//                    return "";
+//                }
+//        );
+//
+//        Spark.post("/create-message",
+//                (request, response) -> {
+//                    Session session = request.session();
+//                    String userName = session.attribute("userName");
+//
+//                    if (userName == null) {
+//                        response.redirect("/");
+//                        return "";
+//                    }
+//
+//                    // get message from query string
+//                    String message = request.queryParams("message");
+//
+//                    users.get(userName).messages.add(message);
+//
+//                    response.redirect("/");
+//
+//
+//                    return "";
+//                }
+//        );
 
 
     }
