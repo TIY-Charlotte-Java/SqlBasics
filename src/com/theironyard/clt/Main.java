@@ -18,6 +18,7 @@ public class Main {
 
         Statement stmt = conn.createStatement();
         stmt.execute("CREATE TABLE IF NOT EXISTS messages(id IDENTITY , username VARCHAR, messages VARCHAR");
+        User.getMessages();
 
         Spark.init();
 

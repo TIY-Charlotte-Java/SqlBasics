@@ -15,7 +15,7 @@ public class User {
         this.name = name;
 
     }
-    public ArrayList<Message> getMessages() throws SQLException{
+    public static ArrayList<Message> getMessages() throws SQLException{
         ensureMessagesExists();
         Connection conn = DriverManager.getConnection("jdbc:h2:./main");
 
