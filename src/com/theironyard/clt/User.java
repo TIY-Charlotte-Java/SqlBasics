@@ -11,23 +11,44 @@ public class User {
 //    private static int id;
 //    private static int seqNum;
 //    private static String user;
-    public String name;
+    public User(String name) {
+        this.name = name;
+    }
 
+    public static void main(String[] args) throws SQLException {
     Connection conn = DriverManager.getConnection("jdbc:h2:./main");
 
     Statement stmt = conn.createStatement();
 
-    stmt.execute("CREATE TABLE IF NOT EXISTS users (id IDENTITY, userName VARCHAR, messages VARCHAR, messageNumber INT) ");
-    stmt.execute("INSERT INTO messages (" + "user_id," + " username," + " messageNumber," + " messages ) VALUES (" + "null, ?, ?, ?)";
+    stmt.execute("CREATE TABLE IF NOT EXISTS users (id IDENTITY, userName VARCHAR, messages VARCHAR ) ");
+    stmt.execute("INSERT INTO messages VALUES (" + "user_id," + " userName," + " messages ) VALUES (" + "null, ?, ?, )";
     stmt.execute("UPDATE messages SET messageNumber int i = 0 WHERE 0 = messageNumber ");
-//        stmt.execute("DELETE FROM users WHERE ");
+    stmt.execute("DELETE FROM users WHERE id = 'NULL' ");
 
-
-
-    public User(String name) {
-        this.name = name;
+    PreparedStatement stmt2 = conn.prepareStatement("INSERT INTO messages VALUES (NULL, ?, ?, ? )");
+    stmt2.setString(1, "user_id");
+    stmt2.setString(2, "userName");
+    stmt2.setString(4, "messages");
+    stmt2.execute();
 
     }
+
+
+    ResultSet results = stmt.executeQuery("SELECT * FROM users");
+    while (results.next()) {
+        String user_id = results.getString( "user_id");
+        String userName = results.getString("userName");
+        String messages = results.getMessage("messages");
+        System.out.printf("%s %s %s\n", user_id, userName, messages);
+    }
+
+
+}
+
+
+
+
+
 
 //    public static void updateMessages (
 //            Connection conn,
@@ -63,4 +84,4 @@ public class User {
 //            ps.close();
 //        }
 //    }
-}
+
