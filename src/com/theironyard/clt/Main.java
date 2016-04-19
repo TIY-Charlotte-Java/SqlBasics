@@ -19,7 +19,7 @@ public class Main {
         Connection conn = DriverManager.getConnection("jdbc:h2:./main");
 
         Statement stmt = conn.createStatement();
-        stmt.execute("CREATE TABLE IF NOT EXIST messages(message IDENTIFY , username VARCHAR, text VARCHAR");
+        stmt.execute("CREATE TABLE IF NOT EXIST messages(id IDENTIFY , username VARCHAR, messages VARCHAR");
 
         Spark.init();
 
