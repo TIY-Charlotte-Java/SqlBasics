@@ -1,9 +1,6 @@
 package com.theironyard.clt;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 
 
@@ -22,13 +19,25 @@ public class User {
         ensureMessagesExists();
         Connection conn = DriverManager.getConnection("jdbc:h2:./main");
 
-        Statement stmt = conn.createStatement();
-        stmt.execute("SELECT * FROM messages WHERE username = current");
+        PreparedStatement stmnt2 = conn.prepareStatement("SELECT * FROM messages WHERE username = ?");
+        stmnt2.setString(1, name);
+
+        ResultSet results = stmnt2.executeQuery();
+        ArrayList<Message> messages = new ArrayList<>();
+        while (results.next()) {
+            String text = results.getString("text");
+            String username = results.getString("username");
+            int id = results.getInt("id");
+            
+
+        }
+
+
         //make statement
         //execute statement
-        ArrayList<String> messages = new ArrayList<>();
-        messages.add();
 
+
+        return messages;
     }
 
     public static void addMessage(String text) throws SQLException{
