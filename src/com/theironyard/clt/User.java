@@ -14,9 +14,13 @@ public class User {
         this.name = name;
 
     }
-    public void getMessages() {
-        ArrayList<String> messages = new ArrayList<>();
-        messages.add(name);
+    public ArrayList<message> getMessages() {
+        //ensure messages exists
+        //connect ot database
+        //make statement
+        //execute statement
+//        ArrayList<String> messages = new ArrayList<>();
+//        messages.add(name);
 
     }
 
@@ -35,7 +39,7 @@ public class User {
         //execute statement
 
     }
-    
+
     public static void editMessage(String text, int messageId) {
         //ensure messages exists
         //connect to database
