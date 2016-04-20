@@ -1,17 +1,33 @@
 <html>
 <body>
-
-Hello, {{ users.name }}!
+Hello, {{ user.name }}!
 <form action="/create-message" method="post">
-    <input type="text" placeholder="Enter your message" name="message"/>
-    <button type="submit">Login</button>
+    <input type="text" name="message" />
+    <input type="submit" value="Post" />
 </form>
 
-<ol>
-    {{#users.messages}}
+<form action="/edit-message" method="post">
+    Message Text:
+    <input type="text" name="newMessage" />
+    Message Number:
+    <input type="number" value="Message #" name="messageNumber" />
+    <input type="submit" value="Edit Message" />
+</form>
+
+<form action="/delete-message" method="post">asdfasdf
+    Message Number:
+    <input type="number" value="Message #" name="messageNumber" />
+    <input type="submit" value="Delete Message" />
+</form>
+
+<h3>Here are your message:
+</h3>
+
+<ul>
+    {{#messages}}
     <li>{{.}}</li>
-    {{/users.messages}}
-</ol>
+    {{/messages}}
+</ul>
 
 </body>
 </html>

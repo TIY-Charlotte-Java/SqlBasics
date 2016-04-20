@@ -1,87 +1,99 @@
 package com.theironyard.clt;
 
+import sun.plugin2.message.Message;
+
 import java.sql.*;
+import java.util.ArrayList;
 
 /**
  * Created by mac on 4/18/16.
  */
 public class User {
-//    private static Connection conn;
-//    private static String messages;
-//    private static int id;
-//    private static int seqNum;
-//    private static String user;
-    public User(String name) {
+    private final String CREATE_SQL = "CREATE TABLE IF NOT EXISTS messages (id IDENTITY, userName VARCHAR, message VARCHAR)";
+    private final String INSERT_SQL = "INSERT INTO messages VALUES (null, ?, ?)";
+    private final String UPDATE_SQL = "UPDATE messages SET message = ? Where userName = ?";
+    private final String DELETE_SQL = "DELETE FROM messages WHERE id = ?";
+    private final String SELECT_SQL = "SELECT * FROM messages where userName = ?";
+    private final String CONNECTION_STRING = "jdbc:h2:./main";
+
+    public String userName;
+    public String password;
+    public String name;
+    public String messages;
+    ArrayList<String> messenger;
+
+    User (String name) {
         this.name = name;
-    }
-
-    public static void main(String[] args) throws SQLException {
-    Connection conn = DriverManager.getConnection("jdbc:h2:./main");
-
-    Statement stmt = conn.createStatement();
-
-    stmt.execute("CREATE TABLE IF NOT EXISTS users (id IDENTITY, userName VARCHAR, messages VARCHAR ) ");
-    stmt.execute("INSERT INTO messages VALUES (" + "user_id," + " userName," + " messages ) VALUES (" + "null, ?, ?, )";
-    stmt.execute("UPDATE messages SET messageNumber int i = 0 WHERE 0 = messageNumber ");
-    stmt.execute("DELETE FROM users WHERE id = 'NULL' ");
-
-    PreparedStatement stmt2 = conn.prepareStatement("INSERT INTO messages VALUES (NULL, ?, ?, ? )");
-    stmt2.setString(1, "user_id");
-    stmt2.setString(2, "userName");
-    stmt2.setString(4, "messages");
-    stmt2.execute();
-
+        password = "password";
+        userName = "name";
     }
 
 
-    ResultSet results = stmt.executeQuery("SELECT * FROM users");
-    while (results.next()) {
-        String user_id = results.getString( "user_id");
+    public void addMessage(String text) throws SQLException {
+        Connection conn = DriverManager.getConnection(CONNECTION_STRING);
+
+        PreparedStatement statement = conn.prepareStatement(INSERT_SQL);
+        statement.setString(1, userName);
+        statement.setString(2, text);
+
+        statement.execute();
+    }
+
+    public ArrayList<Message> getMessages() throws SQLException {
+        Connection conn = DriverManager.getConnection(CONNECTION_STRING);
+
+        PreparedStatement statement = conn.prepareStatement(SELECT_SQL);
+        statement.setString(1, userName);
+
+        ResultSet queryResults = statement.executeQuery();
+
+        ArrayList<Message> results = new ArrayList<>();
+
+        // while loop that goes over all the results rom queryResults
+        // for each result, make a new Message object
+        // set the fields of the message object to the values of the columns in the result
+        // add the mesage to the results arraylist.
+
+        return results;
+
+
+    }
+
+
+//    public static void main(String[] args) throws SQLException {
+//    Connection conn = DriverManager.getConnection("jdbc:h2:./main");
+//
+//    Statement stmt = conn.createStatement();
+//
+//    stmt.execute("CREATE TABLE IF NOT EXISTS messages (id IDENTITY, userName VARCHAR, messages VARCHAR)");
+//    stmt.execute("INSERT INTO messages VALUES (null, ?, ?)");
+//    stmt.execute("UPDATE messages SET message = ? Where userName = ?");
+//    stmt.execute("DELETE FROM messages WHERE userName = ? ");
+//
+//    PreparedStatement stmt2 = conn.prepareStatement("INSERT INTO messages VALUES (NULL, ?, ?)");
+//    stmt2.setString(1, userName);
+//    stmt2.setString(2, message);
+//    stmt2.execute();
+
+
+
+
+    ResultSet results = stmt.executeQuery("SELECT * FROM messages where userName = ?");
+     while (results.next())
+
+    {
+        String messages = results.getString("messages");
+        String userId = results.getString("userId");
         String userName = results.getString("userName");
-        String messages = results.getMessage("messages");
-        System.out.printf("%s %s %s\n", user_id, userName, messages);
+
+        System.out.printf("%s %s %s\n", userId, userName, messages);
+
     }
 
+    }
 
 }
 
 
 
-
-
-
-//    public static void updateMessages (
-//            Connection conn,
-//            String messages,
-//            int id,
-//            int seqNum,
-//            String user
-//
-//    )
-//
-//        throws SQLException
-//
-//    {
-//
-//        User.messages = messages;
-//        User.id = id;
-//        User.seqNum = seqNum;
-//        User.user = user;
-//        try
-//        {
-//            // create our java preparedstatement using a sql update query
-//            PreparedStatement ps = conn.prepareStatement(
-//                    "UPDATE Messages SET messages = ?, user = ? WHERE id = ? AND seq_num = ?");
-//
-//            // set the preparedstatement parameters
-//            ps.setString(1,messages);
-//            ps.setString(2,user);
-//            ps.setInt(3,id);
-//            ps.setInt(4,seqNum);
-//
-//            // call executeUpdate to execute our sql update statement
-//            ps.executeUpdate();
-//            ps.close();
-//        }
-//    }
 

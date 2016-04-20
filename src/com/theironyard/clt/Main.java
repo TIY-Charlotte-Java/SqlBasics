@@ -6,16 +6,16 @@ import spark.ModelAndView;
 import spark.Session;
 import spark.Spark;
 import spark.template.mustache.MustacheTemplateEngine;
+import sun.misc.resources.Messages;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.HashMap;
 import java.util.Scanner;
+
+
+//import static spark.route.HttpMethod.get;
 
 
 public class Main {
@@ -26,55 +26,46 @@ public class Main {
 
 
 
-    public static void serializeMessageState() throws IOException {
-        File f = new File("messages.json");
-        FileWriter fw = new FileWriter(f);
+//    public static void serializeMessageState() throws IOException {
+//        File f = new File("messages.json");
+//        FileWriter fw = new FileWriter(f);
+//
+//        JsonSerializer serializer = new JsonSerializer();
+//
+//        fw.write(serializer.deep(true).serialize(users));
+//
+//        fw.close();
+//    }
+//
+//    public static void getMessagesFromDisk() {
+//        try {
+//            File f = new File("messages.json");
+//            JsonParser parser = new JsonParser();
+//            Scanner fileScanner = new Scanner(f);
+//
+//            fileScanner.useDelimiter("\\Z");
+//            String fileContents = fileScanner.next();
+//
+//            parser.map("values", User.class);
+//
+//            users = parser.parse(fileContents);
+//
+//        } catch (IOException ex) {
+//
+//        }
 
-        JsonSerializer serializer = new JsonSerializer();
-
-        fw.write(serializer.deep(true).serialize(users));
-
-        fw.close();
-    }
-
-    public static void getMessagesFromDisk() {
-        try {
-            File f = new File("messages.json");
-            JsonParser parser = new JsonParser();
-            Scanner fileScanner = new Scanner(f);
-
-            fileScanner.useDelimiter("\\Z");
-            String fileContents = fileScanner.next();
-
-            parser.map("values", User.class);
-
-            users = parser.parse(fileContents);
-
-        } catch (IOException ex) {
-
-        }
-
-    }
+//    }
 
 
     public static void main(String[] args)  {
-
-//        Connection conn = DriverManager.getConnection("jdbc:h2:./main");
-
-//        Statement stmt = conn.createStatement();
-//
-//        stmt.execute("CREATE TABLE IF NOT EXISTS users (id IDENTITY, userName VARCHAR, messages VARCHAR, messageNumber INT) ");
-//        stmt.execute("INSERT INTO users VALUE (NULL, userName, messages, messageNumber) ");
-//        stmt.execute("UPDATE users messages");
-//        stmt.execute("DELETE FROM users WHERE ");
 
 
 
 
         Spark.init();
 
-        getMessagesFromDisk();
-
+//        getMessagesFromDisk();
+//
         Spark.post("/destroy-user", (request, response) -> {
             Session session = request.session();
 
@@ -93,14 +84,14 @@ public class Main {
             }
 
             int messageNumber = Integer.valueOf(request.queryParams("messageNumber"));
-            User currentUser = users.get(session.attribute("userName"));
+            User messages = messages.get(session.attribute("userName"));
 
-            currentUser.messages.remove(messageNumber - 1);
+            messages.messages.remove(messageNumber - 1);
 
             response.redirect("/");
 
-            serializeMessageState();
-
+//            serializeMessageState();
+//
             return "";
         });
 
@@ -115,14 +106,14 @@ public class Main {
 
             String newMessage = request.queryParams("newMessage");
             int messageNumber = Integer.valueOf(request.queryParams("messageNumber"));
-            User currentUser = users.get(session.attribute("userName"));
+            User messages = get.messages(session.attribute("userName"));
 
-            currentUser.messages.remove(messageNumber - 1);
-            currentUser.messages.add(messageNumber - 1, newMessage);
+            messages.remove(messageNumber - 1);
+            messages.messages.add(messageNumber - 1, newMessage);
 
             response.redirect("/");
 
-            serializeMessageState();
+//            serializeMessageState();
             return "";
         });
 
@@ -137,9 +128,10 @@ public class Main {
                     } else {
                         User current = users.get(context.attribute("userName"));
 
-                        HashMap<String, User> model = new HashMap<>();
+                        HashMap<String, Object> model = new HashMap<>();
 
                         model.put("user", current);
+                        model.put("messages", current.getMessages());
 
                         return new ModelAndView(model, "messages.html");
                     }
@@ -188,7 +180,7 @@ public class Main {
 
                     response.redirect("/");
 
-                    serializeMessageState();
+//                    serializeMessageState();
                     return "";
                 }
         );
