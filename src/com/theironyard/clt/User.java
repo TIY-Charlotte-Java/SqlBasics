@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 
 public class User {
-    public static String name;
+    public String name;
     public String password = "42";
 
 
@@ -15,7 +15,7 @@ public class User {
         this.name = name;
 
     }
-    public static ArrayList<Message> getMessages() throws SQLException{
+    public ArrayList<Message> getMessages() throws SQLException{
         ensureMessagesExists();
         Connection conn = DriverManager.getConnection("jdbc:h2:./main");
 
@@ -36,11 +36,11 @@ public class User {
         return messages;
     }
 
-    public static void addMessage(String text) throws SQLException{
+    public void addMessage(String text) throws SQLException{
         ensureMessagesExists();
         Connection conn = DriverManager.getConnection("jdbc:h2:./main");
 
-        PreparedStatement stmt = conn.prepareStatement("INSERT INTO messages VALUES(', ?, ?");
+        PreparedStatement stmt = conn.prepareStatement("INSERT INTO messages VALUES(', ?, ?)");
         stmt.setString(1, name);
         stmt.setString(2, text);
         stmt.executeQuery();
@@ -75,6 +75,6 @@ public class User {
         Connection conn = DriverManager.getConnection("jdbc:h2:./main");
 
         Statement stmt = conn.createStatement();
-        stmt.execute("CREATE TABLE IF NOT EXISTS messages(id IDENTITY , username VARCHAR, text VARCHAR");
+        stmt.execute("CREATE TABLE IF NOT EXISTS messages(id IDENTITY , username VARCHAR, text VARCHAR)");
     }
 }

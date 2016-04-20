@@ -13,16 +13,7 @@ public class Main {
     public static HashMap<String, User> users = new HashMap<>();
 
     public static void main(String[] args) throws SQLException {
-	// write your code here
-        Connection conn = DriverManager.getConnection("jdbc:h2:./main");
-
-        Statement stmt = conn.createStatement();
-        stmt.execute("CREATE TABLE IF NOT EXISTS messages(id IDENTITY , username VARCHAR, messages VARCHAR");
-        User.getMessages();
-
         Spark.init();
-
-
 
         Spark.post("/destroy-user", (request, response) -> {
             Session session = request.session();
@@ -64,7 +55,7 @@ public class Main {
 
             String newMessage = request.queryParams("newMessage");
             int messageNumber = Integer.valueOf(request.queryParams("messageNumber"));
-            User currentUser = users.get(session.attribute("userName"));
+
 
             User.editMessage(newMessage, messageNumber);
 
@@ -132,8 +123,9 @@ public class Main {
                     // get message from query string
                     String message = request.queryParams("message");
 
-                    User.addMessage(message);
+                    User currentUser = users.get(session.attribute("userName"));
 
+                    currentUser.addMessage(message);
                     response.redirect("/");
 
 
