@@ -41,7 +41,7 @@ public class User {
         Connection conn = DriverManager.getConnection("jdbc:h2:./main");
         //my current problem area\/
         PreparedStatement stmt = conn.prepareStatement("INSERT INTO messages VALUES(', ?, ?)");
-        stmt.setString(1, name);
+        stmt.setString(1, Message.userName);
         stmt.setString(2, text);
         stmt.executeQuery();
 
