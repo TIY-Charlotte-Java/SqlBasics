@@ -39,7 +39,7 @@ public class User {
     public void addMessage(String text) throws SQLException{
         ensureMessagesExists();
         Connection conn = DriverManager.getConnection("jdbc:h2:./main");
-
+        //my current problem area\/
         PreparedStatement stmt = conn.prepareStatement("INSERT INTO messages VALUES(', ?, ?)");
         stmt.setString(1, name);
         stmt.setString(2, text);
