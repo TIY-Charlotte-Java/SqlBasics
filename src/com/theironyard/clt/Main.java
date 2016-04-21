@@ -27,10 +27,10 @@ public class Main {
 
     public static void main(String[] args) {
 
-        user.editMessage();
-        user.createMessage();
-        user.addMessage();
-        user.deleteMessage();
+//        user.editMessage();
+//        user.createMessage();
+//        user.addMessage();
+//        user.deleteMessage();
         
 
         Spark.init();
