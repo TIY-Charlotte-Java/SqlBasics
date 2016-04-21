@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<form action="/create-message" method="post">
+    <input type="text" name="message" />
+    <input type="submit" value="Post" />
+</form>
+
+<form action="/destroy-user" method="post">
+    <input type="submit" value="Log out"/>
+</form>
+
+<form action="/edit-message" method="post">
+    Message Text:
+    <input type="text" name="newMessage" />
+    Message Number:
+    <input type="number" value="Message #" name="messageNumber" />
+    <input type="submit" value="Edit Message" />
+</form>
+
+<form action="/delete-message" method="post">
+    Message Number:
+    <input type="number" value="Message #" name="messageNumber" />
+    <input type="submit" value="Delete Message" />
+</form>
+
+<h3>Here are your message:
+</h3>
+<ul>
+    {{#messages}}
+    <li>{{.}}</li>
+    {{/messages}}
+</ul>
+
+</body>
+</html>
