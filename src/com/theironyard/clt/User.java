@@ -19,13 +19,18 @@ public class User {
     public String userName;
     public String password;
     public String name;
-    public String messages;
-    ArrayList<String> messenger;
+    public String messageId;
+    public int id;
+    ArrayList<String> messages;
 
-    User (String name) {
+    User (String name, int id) {
         this.name = name;
+        this.id = id;
         password = "password";
         userName = "name";
+        messageId = "id";
+
+
     }
 
 
@@ -35,9 +40,45 @@ public class User {
         PreparedStatement statement = conn.prepareStatement(INSERT_SQL);
         statement.setString(1, userName);
         statement.setString(2, text);
+        statement.setString(3, messageId);
 
         statement.execute();
     }
+
+    public void createMessage(String text) throws SQLException {
+        Connection conn = DriverManager.getConnection(CONNECTION_STRING);
+
+        PreparedStatement statement = conn.prepareStatement(CREATE_SQL);
+        statement.setString(1, userName);
+        statement.setString(2, text);
+        statement.setString(3, messageId);
+
+        statement.execute();
+    }
+
+    public void editMessage(String text) throws SQLException {
+        Connection conn = DriverManager.getConnection(CONNECTION_STRING);
+
+        PreparedStatement statement = conn.prepareStatement(UPDATE_SQL);
+        statement.setString(1, text);
+        statement.setString(2, messageId);
+
+        statement.execute();
+    }
+
+    public void deleteMessage(String messageId) throws SQLException {
+        Connection conn = DriverManager.getConnection(CONNECTION_STRING);
+
+        PreparedStatement statement = conn.prepareStatement(DELETE_SQL);
+        statement.setString(1, messageId);
+
+
+        statement.execute();
+
+
+
+    }
+
 
     public ArrayList<Message> getMessages() throws SQLException {
         Connection conn = DriverManager.getConnection(CONNECTION_STRING);
@@ -45,14 +86,14 @@ public class User {
         PreparedStatement statement = conn.prepareStatement(SELECT_SQL);
         statement.setString(1, userName);
 
-        ResultSet queryResults = statement.executeQuery();
+        statement.executeQuery();
 
         ArrayList<Message> results = new ArrayList<>();
 
         // while loop that goes over all the results rom queryResults
         // for each result, make a new Message object
         // set the fields of the message object to the values of the columns in the result
-        // add the mesage to the results arraylist.
+        // add the message to the results arraylist.
 
         return results;
 
@@ -60,39 +101,10 @@ public class User {
     }
 
 
-//    public static void main(String[] args) throws SQLException {
-//    Connection conn = DriverManager.getConnection("jdbc:h2:./main");
-//
-//    Statement stmt = conn.createStatement();
-//
-//    stmt.execute("CREATE TABLE IF NOT EXISTS messages (id IDENTITY, userName VARCHAR, messages VARCHAR)");
-//    stmt.execute("INSERT INTO messages VALUES (null, ?, ?)");
-//    stmt.execute("UPDATE messages SET message = ? Where userName = ?");
-//    stmt.execute("DELETE FROM messages WHERE userName = ? ");
-//
-//    PreparedStatement stmt2 = conn.prepareStatement("INSERT INTO messages VALUES (NULL, ?, ?)");
-//    stmt2.setString(1, userName);
-//    stmt2.setString(2, message);
-//    stmt2.execute();
-
-
-
-
-    ResultSet results = stmt.executeQuery("SELECT * FROM messages where userName = ?");
-     while (results.next())
-
-    {
-        String messages = results.getString("messages");
-        String userId = results.getString("userId");
-        String userName = results.getString("userName");
-
-        System.out.printf("%s %s %s\n", userId, userName, messages);
 
     }
 
-    }
 
-}
 
 
 
