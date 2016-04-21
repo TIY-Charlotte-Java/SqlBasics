@@ -34,3 +34,6 @@ INSERT INTO messages VALUES(', ?, ?) [42000-190]
 2016-04-20 16:30:42 jdbc[4]: exception
 org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "INSERT INTO messages VALUES([*]', ?, ?)"; SQL statement:
 INSERT INTO messages VALUES(', ?, ?) [42000-190]
+2016-04-20 19:17:10 jdbc[4]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "INSERT INTO messages VALUES([*]', ?, ?)"; SQL statement:
+INSERT INTO messages VALUES(', ?, ?) [42000-190]

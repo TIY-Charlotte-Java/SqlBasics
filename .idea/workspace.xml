@@ -2,8 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="78d843d4-f324-459c-9b2e-acd27a63b5e6" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main.mv.db" afterPath="$PROJECT_DIR$/main.mv.db" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/11-Microblog-Database/com/theironyard/clt/User.class" afterPath="$PROJECT_DIR$/out/production/11-Microblog-Database/com/theironyard/clt/User.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/11-Microblog-Database/com/theironyard/clt/main.mv.db" afterPath="$PROJECT_DIR$/out/production/11-Microblog-Database/com/theironyard/clt/main.mv.db" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/theironyard/clt/User.java" afterPath="$PROJECT_DIR$/src/com/theironyard/clt/User.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main.trace.db" afterPath="$PROJECT_DIR$/main.trace.db" />
     </list>
     <ignored path="11-Microblog-Database.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -25,11 +28,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Main.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/theironyard/clt/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1905">
-              <caret line="127" column="52" selection-start-line="127" selection-start-column="52" selection-end-line="127" selection-end-column="52" />
+            <state relative-caret-position="15">
+              <caret line="16" column="0" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -37,10 +40,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="User.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="User.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/theironyard/clt/User.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="117">
+            <state relative-caret-position="387">
               <caret line="53" column="31" selection-start-line="53" selection-start-column="31" selection-end-line="53" selection-end-column="31" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -125,8 +128,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -187,7 +189,8 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -763,6 +766,16 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/theironyard/clt/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="16" column="0" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/theironyard/clt/Message.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="225">
@@ -773,18 +786,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/theironyard/clt/User.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="117">
+        <state relative-caret-position="387">
           <caret line="53" column="31" selection-start-line="53" selection-start-column="31" selection-end-line="53" selection-end-column="31" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/theironyard/clt/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1905">
-          <caret line="127" column="52" selection-start-line="127" selection-start-column="52" selection-end-line="127" selection-end-column="52" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
