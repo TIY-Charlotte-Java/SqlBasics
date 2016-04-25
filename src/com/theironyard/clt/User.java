@@ -9,6 +9,7 @@ import java.util.ArrayList;
  * Created by mac on 4/18/16.
  */
 public class User {
+    private final String CREATE_USERS_SQL = "CREATE TABLE IF NOT EXISTS users (id IDENTITY, userName VARCHAR, firstName VARCHAR, lastName VARCHAR)";
     private final String CREATE_SQL = "CREATE TABLE IF NOT EXISTS messages (id IDENTITY, userName VARCHAR, message VARCHAR)";
     private final String INSERT_SQL = "INSERT INTO messages VALUES (null, ?, ?)";
     private final String UPDATE_SQL = "UPDATE messages SET message = ? Where userName = ?";
@@ -20,6 +21,8 @@ public class User {
     public String password;
     public String name;
     public String messageId;
+    public String firstName;
+    public String lastName;
     public int id;
     ArrayList<String> messages;
 
@@ -29,6 +32,8 @@ public class User {
         password = "password";
         userName = "name";
         messageId = "id";
+        firstName = "firstName";
+        lastName = "lastName";
 
 
     }
@@ -41,6 +46,19 @@ public class User {
         statement.setString(1, userName);
         statement.setString(2, text);
         statement.setString(3, messageId);
+
+        statement.execute();
+    }
+
+    public void createUser(String text) throws SQLException {
+        Connection conn = DriverManager.getConnection(CONNECTION_STRING);
+
+        PreparedStatement statement = conn.prepareStatement(CREATE_USERS_SQL);
+        statement.setString(1, userName);
+        statement.setString(2, text);
+        statement.setString(3, firstName);
+        statement.setString(4, lastName);
+
 
         statement.execute();
     }
@@ -102,7 +120,7 @@ public class User {
 
 
 
-    }
+}
 
 
 
